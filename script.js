@@ -1,6 +1,7 @@
 const colors = document.getElementsByClassName('color');
 const button = document.getElementById('button-random-color');
 const pixelBoard = document.getElementById('pixel-board');
+const colorBoard = document.getElementById('color-palette');
 
 function generateColor() {
   const colorPalette = [];
@@ -37,6 +38,13 @@ function createBoard(number) {
   pixelBoard.style = `grid-template-columns: repeat(${number}, 40px)`;
 }
 
+/* function selectColor() {
+  const sdasd = colorBoard.event.target;
+  console.log(sdasd);
+} */
+
 createBoard(5);
 localColor();
+
 button.addEventListener('click', generateColor);
+/* colorBoard.addEventListener('click', selectColor); */
