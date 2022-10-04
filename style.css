@@ -31,3 +31,14 @@
 button {
     width: 80px;
 }
+
+#pixel-board {
+    padding: 50px;
+    display: grid;
+}
+
+.pixel {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+}
