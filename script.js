@@ -40,7 +40,7 @@ function generateColor() {
   localStorage.setItem('colorPalette', JSON.stringify(colorPalette));
 }
 
-function localColor() {
+function loadColor() {
   const colorPalette = JSON.parse(localStorage.getItem('colorPalette'));
   if (colorPalette != null) {
     for (let index = 0; index < colorPalette.length; index += 1) {
@@ -103,15 +103,6 @@ function loadDrawing() {
   }
 }
 
-/* function newBoard() {
-  size = input.value;
-  if (size >= 5 && size <= 50) {
-    resetBoard();
-  } else {
-    window.alert('Board inválido!');
-  }
-} */
-
 function newBoard() {
   size = input.value;
   switch (true) {
@@ -132,7 +123,7 @@ function newBoard() {
 }
 
 createBoard(size);
-localColor();
+loadColor();
 loadDrawing();
 
 buttonColor.addEventListener('click', generateColor);
