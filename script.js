@@ -38,13 +38,26 @@ function createBoard(number) {
   pixelBoard.style = `grid-template-columns: repeat(${number}, 40px)`;
 }
 
-/* function selectColor() {
-  const sdasd = colorBoard.event.target;
-  console.log(sdasd);
-} */
+function selectColor() {
+  const newSelected = window.event.target;
+  const selected = document.getElementsByClassName('selected')[0];
+  if (newSelected.className === 'color') {
+    selected.className = 'color';
+    newSelected.className = 'color selected';
+  }
+}
+
+function paint() {
+  const painted = window.event.target;
+  const selectedColor = document.getElementsByClassName('selected')[0];
+  if (painted.className === 'pixel') {
+    painted.style.backgroundColor = selectedColor.style.backgroundColor;
+  }
+}
 
 createBoard(5);
 localColor();
 
 button.addEventListener('click', generateColor);
-/* colorBoard.addEventListener('click', selectColor); */
+colorBoard.addEventListener('click', selectColor);
+pixelBoard.addEventListener('click', paint);
