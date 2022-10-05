@@ -43,6 +43,7 @@ input {
 #pixel-board {
   padding: 20px;
   display: grid;
+  overflow: auto;
 }
 
 .pixel {

@@ -36,7 +36,6 @@ function generateColor() {
     colors[index].style.backgroundColor = color;
     colorPalette.push(color);
   }
-
   localStorage.setItem('colorPalette', JSON.stringify(colorPalette));
 }
 
@@ -106,19 +105,19 @@ function loadDrawing() {
 function newBoard() {
   size = input.value;
   switch (true) {
-  case size === '':
-    window.alert('Board inválido!');
-    break;
-  case size < 5:
-    size = 5;
-    resetBoard();
-    break;
-  case size > 50:
-    size = 50;
-    resetBoard();
-    break;
-  default:
-    resetBoard();
+    case size === '':
+      window.alert('Board inválido!');
+      break;
+    case size < 5:
+      size = 5;
+      resetBoard();
+      break;
+    case size > 50:
+      size = 50;
+      resetBoard();
+      break;
+    default:
+      resetBoard();
   }
 }
 
