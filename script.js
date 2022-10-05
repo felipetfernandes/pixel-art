@@ -1,8 +1,18 @@
 const colors = document.getElementsByClassName('color');
 const buttonColor = document.getElementById('button-random-color');
 const buttonClear = document.getElementById('clear-board');
+const buttonGenerate = document.getElementById('generate-board');
+const input = document.getElementById('board-size');
 const pixelBoard = document.getElementById('pixel-board');
 const colorBoard = document.getElementById('color-palette');
+
+let size = 0;
+if (JSON.parse(localStorage.getItem('boardSize')) != null) {
+  size = JSON.parse(localStorage.getItem('boardSize'));
+} else {
+  size = 5;
+}
+
 let savedDrawing = {};
 
 function randomColor() {
@@ -52,6 +62,16 @@ function createBoard(number) {
   pixelBoard.style = `grid-template-columns: repeat(${number}, 40px)`;
 }
 
+function resetBoard() {
+  while (pixelBoard.firstChild) {
+    pixelBoard.removeChild(pixelBoard.firstChild);
+  }
+  createBoard(size);
+  localStorage.setItem('boardSize', size);
+  localStorage.removeItem('pixelBoard');
+  savedDrawing = {};
+}
+
 function selectColor() {
   const newSelected = window.event.target;
   const selected = document.getElementsByClassName('selected')[0];
@@ -71,32 +91,52 @@ function paint() {
   }
 }
 
-function clearBoard() {
-  const pixels = document.getElementsByClassName('pixel');
-  for (let index = 0; index < pixels.length; index += 1) {
-    pixels[index].style.backgroundColor = '#ffffff';
-  }
-  localStorage.removeItem('pixelBoard');
-  savedDrawing = {};
-}
-
 function loadDrawing() {
   const pixels = document.getElementsByClassName('pixel');
-  for (let index = 0; index < pixels.length; index += 1) {
-    savedDrawing = JSON.parse(localStorage.getItem('pixelBoard'));
-    if (savedDrawing !== null) {
+  savedDrawing = JSON.parse(localStorage.getItem('pixelBoard'));
+  if (savedDrawing !== null) {
+    for (let index = 0; index < pixels.length; index += 1) {
       pixels[index].style.backgroundColor = savedDrawing[index];
-    } else {
-      savedDrawing = {};
     }
+  } else {
+    savedDrawing = {};
   }
 }
 
-createBoard(5);
+/* function newBoard() {
+  size = input.value;
+  if (size >= 5 && size <= 50) {
+    resetBoard();
+  } else {
+    window.alert('Board inválido!');
+  }
+} */
+
+function newBoard() {
+  size = input.value;
+  switch (true) {
+  case size === '':
+    window.alert('Board inválido!');
+    break;
+  case size < 5:
+    size = 5;
+    resetBoard();
+    break;
+  case size > 50:
+    size = 50;
+    resetBoard();
+    break;
+  default:
+    resetBoard();
+  }
+}
+
+createBoard(size);
 localColor();
 loadDrawing();
 
 buttonColor.addEventListener('click', generateColor);
-buttonClear.addEventListener('click', clearBoard);
+buttonClear.addEventListener('click', resetBoard);
+buttonGenerate.addEventListener('click', newBoard);
 colorBoard.addEventListener('click', selectColor);
 pixelBoard.addEventListener('click', paint);

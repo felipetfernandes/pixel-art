@@ -29,10 +29,15 @@
   width: 80px;
 }
 
-#clear-board {
+.wrapper-options > button, input {
   margin-top: 20px;
   width: 80px;
   height: 40px;
+}
+
+input {
+    margin-left: 90px;
+    text-align: center;
 }
 
 #pixel-board {
