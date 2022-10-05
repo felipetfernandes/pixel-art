@@ -3,17 +3,28 @@ const button = document.getElementById('button-random-color');
 const pixelBoard = document.getElementById('pixel-board');
 const colorBoard = document.getElementById('color-palette');
 
+function randomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i += 1) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 function generateColor() {
   const colorPalette = [];
-  for (let index = 1; index < 4; index += 1) {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i += 1) {
-      color += letters[Math.floor(Math.random() * 16)];
+  let color = '';
+  for (let index = 0; index < 4; index += 1) {
+    if (index === 0) {
+      color = '#000';
+    } else {
+      color = randomColor();
     }
     colors[index].style.backgroundColor = color;
     colorPalette.push(color);
   }
+
   localStorage.setItem('colorPalette', JSON.stringify(colorPalette));
 }
 
@@ -21,7 +32,7 @@ function localColor() {
   const colorPalette = JSON.parse(localStorage.getItem('colorPalette'));
   if (colorPalette != null) {
     for (let index = 0; index < colorPalette.length; index += 1) {
-      colors[index + 1].style.backgroundColor = colorPalette[index];
+      colors[index].style.backgroundColor = colorPalette[index];
     }
   } else {
     generateColor();
