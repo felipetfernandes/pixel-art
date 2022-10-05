@@ -3,6 +3,7 @@ const buttonColor = document.getElementById('button-random-color');
 const buttonClear = document.getElementById('clear-board');
 const pixelBoard = document.getElementById('pixel-board');
 const colorBoard = document.getElementById('color-palette');
+let savedDrawing = {};
 
 function randomColor() {
   const letters = '0123456789ABCDEF';
@@ -44,6 +45,7 @@ function createBoard(number) {
   for (let index = 0; index < number * number; index += 1) {
     const div = document.createElement('div');
     div.className = 'pixel';
+    div.id = index;
     div.style.backgroundColor = '#ffffff';
     pixelBoard.appendChild(div);
   }
@@ -64,6 +66,8 @@ function paint() {
   const selectedColor = document.getElementsByClassName('selected')[0];
   if (painted.className === 'pixel') {
     painted.style.backgroundColor = selectedColor.style.backgroundColor;
+    savedDrawing[painted.id] = selectedColor.style.backgroundColor;
+    localStorage.setItem('pixelBoard', JSON.stringify(savedDrawing));
   }
 }
 
@@ -72,10 +76,25 @@ function clearBoard() {
   for (let index = 0; index < pixels.length; index += 1) {
     pixels[index].style.backgroundColor = '#ffffff';
   }
+  localStorage.removeItem('pixelBoard');
+  savedDrawing = {};
+}
+
+function loadDrawing() {
+  const pixels = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    savedDrawing = JSON.parse(localStorage.getItem('pixelBoard'));
+    if (savedDrawing !== null) {
+      pixels[index].style.backgroundColor = savedDrawing[index];
+    } else {
+      savedDrawing = {};
+    }
+  }
 }
 
 createBoard(5);
 localColor();
+loadDrawing();
 
 buttonColor.addEventListener('click', generateColor);
 buttonClear.addEventListener('click', clearBoard);
