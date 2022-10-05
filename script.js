@@ -1,5 +1,6 @@
 const colors = document.getElementsByClassName('color');
-const button = document.getElementById('button-random-color');
+const buttonColor = document.getElementById('button-random-color');
+const buttonClear = document.getElementById('clear-board');
 const pixelBoard = document.getElementById('pixel-board');
 const colorBoard = document.getElementById('color-palette');
 
@@ -17,7 +18,7 @@ function generateColor() {
   let color = '';
   for (let index = 0; index < 4; index += 1) {
     if (index === 0) {
-      color = '#000';
+      color = '#000000';
     } else {
       color = randomColor();
     }
@@ -66,9 +67,17 @@ function paint() {
   }
 }
 
+function clearBoard() {
+  const pixels = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = '#ffffff';
+  }
+}
+
 createBoard(5);
 localColor();
 
-button.addEventListener('click', generateColor);
+buttonColor.addEventListener('click', generateColor);
+buttonClear.addEventListener('click', clearBoard);
 colorBoard.addEventListener('click', selectColor);
 pixelBoard.addEventListener('click', paint);
