@@ -58,7 +58,8 @@ function createBoard(number) {
     div.style.backgroundColor = '#ffffff';
     pixelBoard.appendChild(div);
   }
-  pixelBoard.style = `grid-template-columns: repeat(${number}, 40px)`;
+  pixelBoard.style = `grid-template-columns: repeat(${number}, 1fr)`;
+  pixelBoard.style.gridTemplateRows = `repeat(${number}, 1fr)`;
 }
 
 function resetBoard() {

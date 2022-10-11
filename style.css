@@ -11,6 +11,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url(rsz_1wallpaperflarecom_wallpaper_3.jpg);
+}
+
+#title {
+  margin-top: 30px;
 }
 
 #color-palette {
@@ -23,31 +28,36 @@
   border: 1px solid black;
   width: 50px;
   height: 50px;
+  border-radius: 10px;
 }
 
-#button-random-color {
+button {
   width: 80px;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(212, 212, 212);
 }
 
 .wrapper-options > button , input {
   margin-top: 20px;
-  width: 80px;
+
   height: 40px;
 }
 
 input {
   margin-left: 90px;
   text-align: center;
+  border-radius: 10px;
 }
 
 #pixel-board {
   padding: 20px;
   display: grid;
   overflow: auto;
+  width: 600px;
+  height: 600px;
 }
 
 .pixel {
-  width: 40px;
-  height: 40px;
-  border: 1px solid black;
+  border: 1px solid rgb(0, 0, 0);
 }
