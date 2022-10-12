@@ -4,14 +4,18 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url(rsz_1wallpaperflarecom_wallpaper_3.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: fixed;
+}
+
 .wrapper {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(rsz_1wallpaperflarecom_wallpaper_3.jpg);
 }
 
 #title {
@@ -53,11 +57,10 @@ input {
 #pixel-board {
   padding: 20px;
   display: grid;
-  overflow: auto;
   width: 600px;
   height: 600px;
 }
 
 .pixel {
-  border: 1px solid rgb(0, 0, 0);
+  border: 0.25px solid rgb(0, 0, 0);
 }
