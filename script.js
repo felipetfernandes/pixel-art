@@ -91,6 +91,16 @@ function paint() {
   }
 }
 
+pixelBoard.oncontextmenu = () => {
+  const painted = window.event.target;
+  if (painted.className === 'pixel') {
+    painted.style.backgroundColor = 'white';
+    savedDrawing[painted.id] = 'white';
+    localStorage.setItem('pixelBoard', JSON.stringify(savedDrawing));
+  }
+  return false;
+};
+
 function loadDrawing() {
   const pixels = document.getElementsByClassName('pixel');
   savedDrawing = JSON.parse(localStorage.getItem('pixelBoard'));
@@ -131,3 +141,4 @@ buttonClear.addEventListener('click', resetBoard);
 buttonGenerate.addEventListener('click', newBoard);
 colorBoard.addEventListener('click', selectColor);
 pixelBoard.addEventListener('click', paint);
+
